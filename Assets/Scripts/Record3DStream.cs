@@ -5,6 +5,7 @@ using UnityEngine.Experimental.VFX;
 using Record3D;
 using System;
 using System.IO;
+using UnityEngine.VFX; // Fix for newer versions of Unity
 
 
 // Warninig: experimental, pre-pre-alpha quality
