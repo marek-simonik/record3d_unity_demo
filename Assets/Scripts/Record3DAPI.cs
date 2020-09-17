@@ -79,6 +79,8 @@ namespace Record3D
         // Private vars
         public static byte[] rgbBuffer;
         public static float[] positionsBuffer;
+        public static int frameWidth;
+        public static int frameHeight;
 
 
         // Public interface
@@ -107,6 +109,8 @@ namespace Record3D
 
             _OnNewFrame newFrameCallback = (data) =>
             {
+                frameWidth = data.frameWidth;
+                frameHeight = data.frameHeight;
                 Marshal.Copy(data.rgbFrameBufferPtr, rgbBuffer, 0, rgbBuffer.Length);
                 Marshal.Copy(data.depthFrameBufferPtr, positionsBuffer, 0, positionsBuffer.Length);
             };

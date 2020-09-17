@@ -1,5 +1,7 @@
 # Unity VFX Graph real-time point cloud streaming via Record3D demo 
 
+**2020/09/17 Update**: Introduced LiDAR support
+
 This demo shows how to use the [Record3D app](https://record3d.app/) to stream Point Clouds from your iPhone/iPad with the TrueDepth camera into Unity VFX Graph in real-time.
 
 <img src="img/record3d_unity_vfx_graph.gif">

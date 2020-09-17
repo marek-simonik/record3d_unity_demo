@@ -5,7 +5,8 @@ using UnityEngine.Experimental.VFX;
 using Record3D;
 using System;
 using System.IO;
-using UnityEngine.VFX; // Fix for newer versions of Unity
+using Unity.Collections;
+// using UnityEngine.VFX; // Fix for newer versions of Unity
 
 
 // Warninig: experimental, pre-pre-alpha quality
@@ -26,29 +27,37 @@ public class Record3DStream : MonoBehaviour
 
     void Start()
 	{
-        SetupTextures();
-        StartStreaming(deviceIndex);
-    }
-
-	void SetupTextures()
-    {
         if (streamEffect == null)
         {
             Debug.LogWarning("Visual Effect not assigned, assign it to Record3DStream Script.");
         }
 
         var frameMetadata = Record3DDeviceStream.frameMetadata;
+        ReinitializeTextures(frameMetadata.width, frameMetadata.height);
 
-        positionTex = new Texture2D(frameMetadata.width, frameMetadata.height, TextureFormat.RGBAFloat, false)
+        StartStreaming(deviceIndex);
+    }
+
+    void ReinitializeTextures(int width, int height)
+    {
+        Destroy(positionTex);
+        Destroy(colorTex);
+        positionTex = null;
+        colorTex = null;
+        Resources.UnloadUnusedAssets();
+
+        positionTex = new Texture2D(width, height, TextureFormat.RGBAFloat, false)
         {
             filterMode = FilterMode.Point
         };
 
-        colorTex = new Texture2D(frameMetadata.width, frameMetadata.height, TextureFormat.RGB24, false)
+        colorTex = new Texture2D(width, height, TextureFormat.RGB24, false)
         {
             filterMode = FilterMode.Point
         };
 
+        int numParticles = width * height;
+        streamEffect.SetInt("Number of Particles", numParticles);
         streamEffect.SetTexture("Particle Position Texture", positionTex);
         streamEffect.SetTexture("Particle Color Texture", colorTex);
     }
@@ -86,10 +95,19 @@ public class Record3DStream : MonoBehaviour
     {
         if (isConnected)
         {
-            positionTex.GetRawTextureData<float>().CopyFrom(Record3DDeviceStream.positionsBuffer);
+            if ( positionTex.width != Record3DDeviceStream.frameWidth || positionTex.height != Record3DDeviceStream.frameHeight )
+            {
+                Debug.Log(String.Format("REINITIALIZING TEXTURES {0}x{1}", Record3DDeviceStream.frameWidth, Record3DDeviceStream.frameHeight));
+                ReinitializeTextures(Record3DDeviceStream.frameWidth, Record3DDeviceStream.frameHeight);
+            }
+
+            var positionTexBufferSize = positionTex.width * positionTex.height * sizeof(float);
+            NativeArray<float>.Copy(Record3DDeviceStream.positionsBuffer, positionTex.GetRawTextureData<float>(), positionTexBufferSize);
             positionTex.Apply(false, false);
 
-            colorTex.GetRawTextureData<byte>().CopyFrom(Record3DDeviceStream.rgbBuffer);
+            const int numRGBChannels = 3;
+            var colorTexBufferSize = colorTex.width * colorTex.height * numRGBChannels * sizeof(byte);
+            NativeArray<byte>.Copy(Record3DDeviceStream.rgbBuffer, colorTex.GetRawTextureData<byte>(), colorTexBufferSize);
             colorTex.Apply(false, false);
         }
     }
