@@ -6,7 +6,7 @@ using Record3D;
 using System;
 using System.IO;
 using Unity.Collections;
-// using UnityEngine.VFX; // Fix for newer versions of Unity
+using UnityEngine.VFX; // Fix for newer versions of Unity
 
 
 // Warninig: experimental, pre-pre-alpha quality
