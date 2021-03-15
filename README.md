@@ -1,5 +1,7 @@
 # Unity VFX Graph real-time point cloud streaming via Record3D demo 
 
+**2021/03/15 Update**: For playback of pre-recorded videos, visit the [record3d_offline_unity_demo](https://github.com/marek-simonik/record3d_offline_unity_demo)
+
 **2020/09/26 Update**: Optimized the project for Unity 2019.4.11f1
 
 **2020/09/17 Update**: Introduced LiDAR support
