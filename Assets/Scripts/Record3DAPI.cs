@@ -28,8 +28,6 @@ namespace Record3D
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi, Pack = 1)]
     public struct FrameMetadata
     {
-        public Int32 width;
-        public Int32 height;
         public Int32 numComponentsPerPositionTexturePixel;
         public Int32 numComponentsPerColorTexturePixel;
     };
@@ -99,16 +97,20 @@ namespace Record3D
         }
 
         public static bool StartStream(Record3DDevice device/*, OnNewFrame onNewFrameCallback, OnStreamStopped onStreamStoppedCallback*/)
-        {
-            var _frameMetadata = frameMetadata;
-            int rgbBuffLength = _frameMetadata.width * _frameMetadata.height * _frameMetadata.numComponentsPerColorTexturePixel;
-            int posBuffLength = _frameMetadata.width * _frameMetadata.height * _frameMetadata.numComponentsPerPositionTexturePixel;
-
-            rgbBuffer = new byte[rgbBuffLength];
-            positionsBuffer = new float[posBuffLength];
-
+        {            
             _OnNewFrame newFrameCallback = (data) =>
             {
+                int rgbBuffLength = data.frameWidth * data.frameHeight * frameMetadata.numComponentsPerColorTexturePixel;
+                int posBuffLength = data.frameWidth * data.frameHeight * frameMetadata.numComponentsPerPositionTexturePixel;
+                if ( rgbBuffer == null || rgbBuffer.Length != rgbBuffLength )
+                {
+                    rgbBuffer = new byte[rgbBuffLength];
+                }
+                if (positionsBuffer == null || positionsBuffer.Length != posBuffLength )
+                {
+                    positionsBuffer = new float[posBuffLength];
+                }
+                
                 frameWidth = data.frameWidth;
                 frameHeight = data.frameHeight;
                 Marshal.Copy(data.rgbFrameBufferPtr, rgbBuffer, 0, rgbBuffer.Length);

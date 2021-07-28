@@ -32,8 +32,7 @@ public class Record3DStream : MonoBehaviour
             Debug.LogWarning("Visual Effect not assigned, assign it to Record3DStream Script.");
         }
 
-        var frameMetadata = Record3DDeviceStream.frameMetadata;
-        ReinitializeTextures(frameMetadata.width, frameMetadata.height);
+        ReinitializeTextures(1, 1);
 
         StartStreaming(deviceIndex);
     }
@@ -102,13 +101,19 @@ public class Record3DStream : MonoBehaviour
             }
 
             var positionTexBufferSize = positionTex.width * positionTex.height * sizeof(float);
-            NativeArray<float>.Copy(Record3DDeviceStream.positionsBuffer, positionTex.GetRawTextureData<float>(), positionTexBufferSize);
-            positionTex.Apply(false, false);
+            if ( Record3DDeviceStream.positionsBuffer != null )
+            {
+                NativeArray<float>.Copy(Record3DDeviceStream.positionsBuffer, positionTex.GetRawTextureData<float>(), positionTexBufferSize);
+                positionTex.Apply(false, false);
+            }
 
             const int numRGBChannels = 3;
             var colorTexBufferSize = colorTex.width * colorTex.height * numRGBChannels * sizeof(byte);
-            NativeArray<byte>.Copy(Record3DDeviceStream.rgbBuffer, colorTex.GetRawTextureData<byte>(), colorTexBufferSize);
-            colorTex.Apply(false, false);
+            if ( Record3DDeviceStream.rgbBuffer != null )
+            {
+                NativeArray<byte>.Copy(Record3DDeviceStream.rgbBuffer, colorTex.GetRawTextureData<byte>(), colorTexBufferSize);
+                colorTex.Apply(false, false);
+            }
         }
     }
 }
