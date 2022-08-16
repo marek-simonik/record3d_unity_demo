@@ -1,5 +1,7 @@
 # Unity VFX Graph real-time point cloud streaming via Record3D demo
 
+**2022/08/16 Update**: **To be used with Record3D 1.7.2 and newer.**
+
 **2021/07/28 Update**: Added support for higher-quality LiDAR RGB streaming. Use this Unity demo with Record3D 1.6 or newer.
 
 **2021/03/15 Update**: For playback of pre-recorded videos, visit the [record3d_offline_unity_demo](https://github.com/marek-simonik/record3d_offline_unity_demo)
@@ -28,13 +30,15 @@ This project contains a modified [Particles VFX](https://github.com/keijiro/Rsvf
 This demo depends on the C++ library [`record3d_unity_streaming`](https://github.com/marek-simonik/record3d_unity_streaming) which you will either need to build yourself or download pre-built (available only for Windows and macOS, you will need to build it yourslef if you are running on Linux).
 
 ##### Pre-built library for Windows
-Only one `dll` file is needed: [`record3d_unity_streaming.dll`](https://github.com/marek-simonik/record3d_unity_streaming/releases/download/v1.3.0/record3d_unity_streaming.dll). Make sure it is in `PATH` — the easiest way is to copy the file into `C:\Windows\System32` and/or into `C:\Windows\SysWOW64`.
+Only one `dll` file is needed: [`record3d_unity_streaming.dll`](https://github.com/marek-simonik/record3d_unity_streaming/releases/download/v1.3.1/record3d_unity_streaming.dll). Make sure it is in `PATH` — the easiest way is to copy the file into `C:\Windows\System32` and/or into `C:\Windows\SysWOW64`.
 
 ##### Pre-built library for macOS
-Similar to Windows, only one `dylib` file is needed: [`librecord3d_unity_streaming.dylib`](https://github.com/marek-simonik/record3d_unity_streaming/releases/download/v1.3.0/librecord3d_unity_streaming.dylib). Just copy it into `/usr/local/lib/`. Alternatively, you can `export` it into `DYLD_LIBRARY_PATH`. 
+Similar to Windows, only one `dylib` file is needed: [`librecord3d_unity_streaming.dylib`](https://github.com/marek-simonik/record3d_unity_streaming/releases/download/v1.3.1/librecord3d_unity_streaming.dylib). Just copy it into `/usr/local/lib/` (create the folder if it doesn't exist yet). Alternatively, you can `export` it into `DYLD_LIBRARY_PATH`.
 
 
 ### After opening the Unity project
+
+1. The first time you open this project on a new computer, restart Unity and re-open the project (there is a Unity bug due to which you must 1) open this project in Unity, 2) close Unity and 3) re-open the project for it to work correctly). You don't need to do this on subsequent runs.
 
 1. Open the LiveStreaming scene (`Assets/LiveStreaming.unity`).
 
