@@ -1,5 +1,7 @@
 # Unity VFX Graph real-time point cloud streaming via Record3D demo
 
+**2024/05/27 Update**: Updated the `record3d_unity_streaming` to version `1.4`.  **To be used with Record3D 1.10 and newer.**
+
 **2022/08/16 Update**: **To be used with Record3D 1.7.2 and newer.**
 
 **2021/07/28 Update**: Added support for higher-quality LiDAR RGB streaming. Use this Unity demo with Record3D 1.6 or newer.
@@ -30,10 +32,10 @@ This project contains a modified [Particles VFX](https://github.com/keijiro/Rsvf
 This demo depends on the C++ library [`record3d_unity_streaming`](https://github.com/marek-simonik/record3d_unity_streaming) which you will either need to build yourself or download pre-built (available only for Windows and macOS, you will need to build it yourslef if you are running on Linux).
 
 ##### Pre-built library for Windows
-Only one `dll` file is needed: [`record3d_unity_streaming.dll`](https://github.com/marek-simonik/record3d_unity_streaming/releases/download/v1.3.1/record3d_unity_streaming.dll). Make sure it is in `PATH` — the easiest way is to copy the file into `C:\Windows\System32` and/or into `C:\Windows\SysWOW64`.
+Only one `dll` file is needed: [`record3d_unity_streaming.dll`](https://github.com/marek-simonik/record3d_unity_streaming/releases/download/v1.4/record3d_unity_streaming.dll). Make sure it is in `PATH` — the easiest way is to copy the file into `C:\Windows\System32` and/or into `C:\Windows\SysWOW64`.
 
 ##### Pre-built library for macOS
-Similar to Windows, only one `dylib` file is needed: [`librecord3d_unity_streaming.dylib`](https://github.com/marek-simonik/record3d_unity_streaming/releases/download/v1.3.1/librecord3d_unity_streaming.dylib). Just copy it into `/usr/local/lib/` (create the folder if it doesn't exist yet). Alternatively, you can `export` it into `DYLD_LIBRARY_PATH`.
+Similar to Windows, only one `dylib` file is needed: [`librecord3d_unity_streaming.dylib`](https://github.com/marek-simonik/record3d_unity_streaming/releases/download/v1.4/librecord3d_unity_streaming.dylib). Just copy it into `/usr/local/lib/` (create the folder if it doesn't exist yet). Alternatively, you can `export` it into `DYLD_LIBRARY_PATH`.
 
 
 ### After opening the Unity project
