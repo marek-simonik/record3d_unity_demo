@@ -32,10 +32,10 @@ This project contains a modified [Particles VFX](https://github.com/keijiro/Rsvf
 This demo depends on the C++ library [`record3d_unity_streaming`](https://github.com/marek-simonik/record3d_unity_streaming) which you will either need to build yourself or download pre-built (available only for Windows and macOS, you will need to build it yourslef if you are running on Linux).
 
 ##### Pre-built library for Windows
-Only one `dll` file is needed: [`record3d_unity_streaming.dll`](https://github.com/marek-simonik/record3d_unity_streaming/releases/download/v1.4/record3d_unity_streaming.dll). Make sure it is in `PATH` — the easiest way is to copy the file into `C:\Windows\System32` and/or into `C:\Windows\SysWOW64`.
+Only one `dll` file is needed: [`record3d_unity_streaming.dll`](https://github.com/marek-simonik/record3d_unity_streaming/releases/download/v1.4.0/record3d_unity_streaming.dll). Make sure it is in `PATH` — the easiest way is to copy the file into `C:\Windows\System32` and/or into `C:\Windows\SysWOW64`.
 
 ##### Pre-built library for macOS
-Similar to Windows, only one `dylib` file is needed: [`librecord3d_unity_streaming.dylib`](https://github.com/marek-simonik/record3d_unity_streaming/releases/download/v1.4/librecord3d_unity_streaming.dylib). Just copy it into `/usr/local/lib/` (create the folder if it doesn't exist yet). Alternatively, you can `export` it into `DYLD_LIBRARY_PATH`.
+Similar to Windows, only one `dylib` file is needed: [`librecord3d_unity_streaming.dylib`](https://github.com/marek-simonik/record3d_unity_streaming/releases/download/v1.4.0/librecord3d_unity_streaming.dylib). Just copy it into `/usr/local/lib/` (create the folder if it doesn't exist yet). Alternatively, you can `export` it into `DYLD_LIBRARY_PATH`.
 
 
 ### After opening the Unity project
