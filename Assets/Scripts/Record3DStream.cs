@@ -19,6 +19,8 @@ public class Record3DStream : MonoBehaviour
     [SerializeField]
     private int deviceIndex = 0;
 
+    private Record3DDevice selectedDevice;
+
     private Texture2D positionTex;
     private Texture2D colorTex;
 
@@ -37,7 +39,12 @@ public class Record3DStream : MonoBehaviour
         StartStreaming(deviceIndex);
     }
 
-    void ReinitializeTextures(int width, int height)
+	void OnDestroy()
+	{
+        StopStreaming();
+	}
+
+	void ReinitializeTextures(int width, int height)
     {
         Destroy(positionTex);
         Destroy(colorTex);
@@ -74,7 +81,7 @@ public class Record3DStream : MonoBehaviour
             Debug.Log(string.Format("Device #{0} selected for streaming.", devIdx));
         }
         
-        var selectedDevice = allAvailableDevices[devIdx];
+        selectedDevice = allAvailableDevices[devIdx];
         bool streamingSuccessfullyStarted = Record3DDeviceStream.StartStream(selectedDevice);
 
         isConnected = streamingSuccessfullyStarted;
@@ -89,6 +96,11 @@ public class Record3DStream : MonoBehaviour
             return;
         }
     }
+
+    void StopStreaming()
+	{
+        Record3DDeviceStream.StopStream(selectedDevice);
+	}
 
     private void Update()
     {

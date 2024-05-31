@@ -73,6 +73,8 @@ namespace Record3D
         [DllImport(LIBRARY_NAME)]
         private static extern bool StartStreaming(Record3DDevice device, _OnNewFrame onNewFrameCallback, _OnStreamStopped onStreamStoppedCallback);
 
+        [DllImport(LIBRARY_NAME)]
+        private static extern void StopStreaming(Record3DDevice device);
 
         // Private vars
         public static byte[] rgbBuffer;
@@ -124,5 +126,10 @@ namespace Record3D
             bool connectionEstablished = StartStreaming(device, newFrameCallback, streamStoppedCallback);
             return connectionEstablished;
         }
+
+        public static void StopStream(Record3DDevice device)
+		{
+            StopStreaming(device);
+		}
     }
 }
